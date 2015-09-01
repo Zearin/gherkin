@@ -28,4 +28,8 @@ class TokenScanner(object):
         return Token((GherkinLine(line, self.line_number) if line else line), location)
     
     def __del__(self):
-        self.io.close() # close file descriptor
+        # close file descriptor if it's still open
+        try:
+            self.io.close()
+        except AttributeError:
+            pass
