@@ -16,15 +16,13 @@ class TokenScanner(object):
             if os.path.exists(path_or_str):
                 self.io = io.open(path_or_str, 'rU')
             else:
-                self.io = io.StringIO(path_or_str)
+                self.io = io.StringIO(path_or_str, encoding='utf-8')
         self.line_number = 0
 
     def read(self):
         self.line_number += 1
         location = {'line': self.line_number}
         line = self.io.readline()
-        if python2:
-            line = line.decode('utf-8')
         return Token((GherkinLine(line, self.line_number) if line else line), location)
     
     def __del__(self):
