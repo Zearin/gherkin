@@ -5,9 +5,9 @@ from .gherkin_line import GherkinLine
 try:
     python2 = True
     from cStringIO import StringIO
+    io.StringIO = StringIO
 except ImportError:
     python2 = False
-    from io import StringIO
 
 
 class TokenScanner(object):
