@@ -1,14 +1,22 @@
+import io
 import os
 import json
 
 
+_DIALECT_FILE = os.path.join(
+    os.path.dirname(__file__),
+    'gherkin-languages.json'
+    )
+
+with io.open(_DIALECT_FILE, 'r') as file:
+    DIALECTS = json.load(file, encoding='utf-8')
+
+
 class Dialect(object):
-    DIALECTS = json.load(open(os.path.join(os.path.dirname(__file__),
-                                           'gherkin-languages.json'), 'r'), encoding='utf-8')
 
     @classmethod
     def for_name(cls, name):
-        return cls(cls.DIALECTS[name]) if name in cls.DIALECTS else None
+        return DIALECTS[name] if name in DIALECTS else None
 
     def __init__(self, spec):
         self.spec = spec
