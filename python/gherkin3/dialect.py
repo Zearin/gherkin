@@ -16,7 +16,7 @@ class Dialect(object):
 
     @classmethod
     def for_name(cls, name):
-        return cls(DIALECTS.get(name, None))
+        return cls(DIALECTS[name]) if name in DIALECTS else None
 
     def __init__(self, spec):
         self.spec = spec
