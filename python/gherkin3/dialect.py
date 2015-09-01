@@ -11,15 +11,12 @@ _DIALECT_FILE = os.path.join(
 with io.open(_DIALECT_FILE, 'r') as file:
     DIALECTS = json.load(file, encoding='utf-8')
 
-def for_name(name):
-    return DIALECTS[name] if name in DIALECTS else None
-
 
 class Dialect(object):
 
     @classmethod
     def for_name(cls, name):
-        return for_name(name)
+        return cls(DIALECTS.get(name, None))
 
     def __init__(self, spec):
         self.spec = spec
